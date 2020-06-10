@@ -1,0 +1,26 @@
+.card img {
+    width: 100%;
+}
+
+.card{
+    padding: 0;
+}
+
+.caption-full{
+    padding: 9px;
+}
+
+.comments{
+    padding: 15px;
+}
+
+#delete-form{
+    display: inline;
+}
+
+#mapid {
+     height: 400px;
+    width: ;
+    margin-top: 30px;
+}
+

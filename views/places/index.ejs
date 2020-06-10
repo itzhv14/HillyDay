@@ -1,0 +1,41 @@
+<%- include ("../partials/header") %>
+
+	<header class="jumbotron">
+		<div class="container">
+			<h1>Welcome to HillyDay!</h1>
+            <hr>
+			<p style="margin-bottom: 25px">
+                India has abundant hill stations spread all over the country that makes for a tranquil
+                and picturesque destination for tourists.
+                Don’t underestimate the power of a hill station holiday in India!
+                You go to the mountains to get a break from your hectic life and you come back with full
+                enthusiasm ready to take life by its horns. And, that my friend, is the power of a vacation in hills!
+                Luckily, India is dotted with many hill stations to choose from. Here’s are few mesmerizing hill stations
+                in India.
+            </p>
+
+            <p>
+				<a class="btn btn-primary btn-lg" href="/places/new">Add new Places</a>
+			</p>
+
+		</div>
+	</header>
+
+
+    <div class="card-deck text-center">
+        <% places.forEach(function(place){ %>
+        <div class="col-md-6 col-lg-4  mb-2">
+            <div class="card p-1" style="width:300px; border-color: #000000; margin-bottom: 10px">
+                <img class="card-img-top" width="100%" src="<%= place.image %>" alt="<%= place.name %>">
+                <div class="card-body">
+                    <h5 class="card-title"><%= place.name %></h5>
+                    <p>
+                        <a class="btn btn-primary" href="/places/<%= place._id%>">Show More</a>
+                    </p>
+                </div>
+            </div>
+        </div>
+            <% }); %>
+    </div>
+
+<%- include ("../partials/footer") %>

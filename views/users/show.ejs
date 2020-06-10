@@ -1,0 +1,24 @@
+<%- include ("../partials/header") %>
+
+<div class="jumbotron">
+    <div class="header">
+        <h1> <%= user.firstName + " " + user.lastName %> </h1>
+    </div>
+    <hr>
+    <div>
+        <%= user.email %>
+    </div>
+    <hr>
+    <div class="list">
+        <h5 style="margin-bottom: 15px;">List of Hill Stations of <%= user.username%> :</h5>
+        <% places.forEach(function (place) { %>
+           <li>
+               <a href="/places/<%=place.id%>"> <%=place.name %> </a>
+           </li>
+       <% }) %>
+    </div>
+</div>
+
+<%- include ("../partials/footer") %>
+
+

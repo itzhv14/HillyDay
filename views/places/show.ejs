@@ -1,0 +1,106 @@
+<%- include ("../partials/header") %>
+
+    <div class="row">
+        <div class="col-md-3">
+            <p class="lead">HillyDay</p>
+            <div class="list-group mb-40">
+                <li class="list-group-item active">Info 1</li>
+                <% var url1= "https://en.wikipedia.org/wiki/" + place.name %>
+                <li class="list-group-item"><a href=" <%= url1 %>">Info 2</a></li>
+                <% var url2= "https://www.yatra.com/india-tour-packages/holidays-in-" + place.name %>
+
+                <li class="list-group-item"><a href=" <%= url2 %>">Info 3</a></li>
+            </div>
+            <div id="mapid"></div>
+        </div>
+        <div class="col-md-9">
+            <div class="card">
+                <img class="img-responsive" src="<%= place.image %>">
+                <div class="caption-full">
+                    <h4 class="float-right">₹ <%= place.price %>/person</h4>
+                    <h4><a><%= place.name %></a></h4>
+                    <p><%- place.description%></p>
+                  <p>
+                      <em>Submitted by: <a href="/users/<%= place.author.id%>"> <%= place.author.username %></a>, <%= moment(place.createdAt).fromNow() %></em>
+                  </p>
+                    <% if(currentUser && place.author.id.equals(currentUser.id)){%>
+                    <a class="btn btn-warning" href="/places/<%= place.id %>/edit">Edit</a>
+                    <form id="delete-form" action="/places/<%= place.id%>?_method=DELETE" method="post">
+                        <button class="btn btn-danger">Delete</button>
+                    </form>
+                    <% } %>
+                </div>
+            </div>
+            <div class="card card-body bg-light comments" style="margin-top: 10px">
+                <div class="text-right">
+                    <a class="btn btn-success" href="/places/<%= place._id %>/comments/new">Add New Comment</a>
+                </div>
+                <hr>
+               <% place.comments.forEach(function(comment){ %>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <strong><a style="color: black;" href="/users/<%= comment.author.id%>"><%= comment.author.username %></a></strong>
+                           <span class="float-right"><%= moment(comment.createdAt).fromNow() %></span>
+                            <p>
+                                <%- comment.text %>
+                            </p>
+                        <% if(currentUser && comment.author.id.equals(currentUser._id)){ %>
+                            <a class="btn btn-xs btn-warning"
+                               href="/places/<%=place._id %>/comments/<%=comment._id %>/edit">Edit</a>
+                            <form id="delete-form" action="/places/<%=place._id %>/comments/<%=comment._id %>?_method=DELETE" method="POST">
+                                <input type="submit" class="btn btn-xs btn-danger" value="Delete">
+                            </form>
+                        <% } %>
+                        </div>
+                    </div>
+                <% }) %>
+            </div>
+        </div>
+    </div>
+<script>
+//Show the Map using a SCRIPT <3
+   var lat = <%=place.lat %>;
+   var lng = <%=place.lng %>;
+   console.log(lat);
+   //Display Map
+
+// L.tileLayer('https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token={accessToken}', {
+//     attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors, <a href="https://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="https://www.mapbox.com/">Mapbox</a>',
+//     maxZoom: 18,
+//     id: 'mapbox/streets-v11',
+//     tileSize: 512,
+//     zoomOffset: -1,
+//     accessToken: 'pk.eyJ1IjoiaGFyc2h2aXZlayIsImEiOiJjazh6cXp0bWQwdTd1M2Z0YWRnaDVkeHp6In0.30S8eaM5ug-mOZLBUg9PKg'
+// }).addTo(mymap);
+//
+
+    var mymap = L.map('mapid').setView([lat, lng],14);
+    L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token={accessToken}', {
+    attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/">OpenStreetMap & OpenCage</a> contributors, <a href="https://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="https://www.mapbox.com/">Mapbox</a>',
+    maxZoom: 18,
+
+    id: 'mapbox.streets',
+    accessToken: 'pk.eyJ1IjoiaGFyc2h2aXZlayIsImEiOiJjazh6cXp0bWQwdTd1M2Z0YWRnaDVkeHp6In0.30S8eaM5ug-mOZLBUg9PKg'
+}).addTo(mymap);
+
+
+// Markers Polylines poluygons circles and popups
+//var marker = L.marker([lat, lng]).addTo(mymap);
+/*var circle = L.circle([51.508, -0.11], {
+    color: 'red',
+    fillColor: '#f03',
+    fillOpacity: 0.5,
+    radius: 500
+}).addTo(mymap);
+var polygon = L.polygon([
+    [51.509, -0.08],
+    [51.503, -0.06],
+    [51.51, -0.047]
+]).addTo(mymap);
+*/
+// Informacion attach
+//marker.bindPopup("<b>Hello Buddy!</b><br><%=place.name%> here.").openPopup();
+/*circle.bindPopup("I am a circle.");
+polygon.bindPopup("I am a polygon.");*/
+</script>
+<%- include ("../partials/footer") %>

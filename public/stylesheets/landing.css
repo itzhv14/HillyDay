@@ -1,0 +1,126 @@
+body {
+  background-color: #000;
+}
+#landing-header {
+  z-index: 1;
+  position: relative;
+  text-align: center;
+  padding-top: 40vh;
+}
+#landing-header h1 {
+  color: #fff;
+}
+.slideshow {
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  z-index: 0;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.slideshow li {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  background-size: cover;
+  background-position: 50% 50%;
+  background-repeat: no-repeat;
+  opacity: 0;
+  z-index: 0;
+  animation: imageAnimation 40s linear infinite;
+}
+.slideshow li:nth-child(1) {
+  background-image: url(https://media.gettyimages.com/photos/munnar-plantation-sun-rise-picture-id688056904?s=2048x2048)
+}
+.slideshow li:nth-child(2) {
+  background-image: url(http://i.imgur.com/emvhOnb.jpg);
+  animation-delay: 8s;
+}
+.slideshow li:nth-child(3) {
+  background-image: url(https://images.unsplash.com/photo-1516703914899-e8303d01329a?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=750&q=80);
+  animation-delay: 16s;
+}
+.slideshow li:nth-child(4) {
+  background-image: url(http://i.imgur.com/2LSMCmJ.jpg);
+  animation-delay: 24s;
+}
+.slideshow li:nth-child(5) {
+  background-image: url(https://media.gettyimages.com/photos/tea-plantation-on-the-hill-of-mountain-view-in-sun-rise-at-malaysia-picture-id512266980?s=2048x2048);
+  animation-delay: 32s;
+}
+
+@keyframes imageAnimation {
+  0% {
+    opacity: 0;
+    animation-timing-function: ease-in;
+  }
+  10% {
+    opacity: 1;
+    animation-timing-function: ease-out;
+  }
+  20% {
+    opacity: 1
+  }
+  30% {
+    opacity: 0
+  }
+}
+
+@import url('https://fonts.googleapis.com/css?family=Amatic+SC');
+
+.description {
+  font-family: 'Amatic SC', cursive;
+  text-align: center;
+}
+
+.description {
+	font-size: 35px;
+}
+
+.btn {
+  border: none;
+  display: block;
+  text-align: center;
+  cursor: pointer;
+  text-transform: uppercase;
+  outline: none;
+  overflow: hidden;
+  position: relative;
+  color: #fff;
+  font-weight: 700;
+  font-size: 15px;
+  background-color: #222;
+  padding: 17px 60px;
+  margin: 0 auto;
+  box-shadow: 0 5px 15px rgba(0,0,0,0.20);
+}
+
+.btn span {
+  position: relative;
+  z-index: 1;
+}
+
+.btn:after {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0;
+  height: 490%;
+  width: 140%;
+  background: #78c7d2;
+  -webkit-transition: all .5s ease-in-out;
+  transition: all .5s ease-in-out;
+  -webkit-transform: translateX(-98%) translateY(-25%) rotate(45deg);
+  transform: translateX(-98%) translateY(-25%) rotate(45deg);
+}
+
+.btn:hover:after {
+  -webkit-transform: translateX(-9%) translateY(-25%) rotate(45deg);
+  transform: translateX(-9%) translateY(-25%) rotate(45deg);
+}
